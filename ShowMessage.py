@@ -15,8 +15,8 @@ classifier = Classifier("Model/keras_model.h5", "Model/labels.txt")
 offset = 20
 imgSize = 300
 
-folder = "Data/C"
-counter = 0
+# folder = "Data/C"
+# counter = 0
 
 message = ""
 startProcessingTime = 0
@@ -51,7 +51,7 @@ while True:
                 wGap = math.ceil((imgSize - wCal) / 2)
                 imgWhite[:, wGap:wCal + wGap] = imgResize
                 prediction, index = classifier.getPrediction(imgWhite, draw=True)
-                # print(prediction, index)
+                print(prediction, index)
 
             else:
                 k = imgSize / w
@@ -61,7 +61,7 @@ while True:
                 hGap = math.ceil((imgSize - hCal) / 2)
                 imgWhite[hGap:hCal + hGap, :] = imgResize
                 prediction, index = classifier.getPrediction(imgWhite, draw=True)
-                # print(prediction, index)
+                print(prediction, index)
 
             cv2.rectangle(imgOutput, (x - offset, y - offset-50),
                         (x - offset+90, y - offset-50+50), (255, 0, 255), cv2.FILLED)
@@ -93,8 +93,11 @@ while True:
 
             cv2.imshow("ImageCrop", imgCrop)
             cv2.imshow("ImageWhite", imgWhite)
+        else:
+            message = ""
     except:
         print("out of bound")
+        message = ""
 
     cv2.imshow("Image", imgOutput)
     if (cv2.waitKey(1) & 0xFF == ord('x')):

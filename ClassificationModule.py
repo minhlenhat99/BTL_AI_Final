@@ -50,6 +50,7 @@ class Classifier:
 
 
 def main():
+    print(tensorflow.__version__)
     cap = cv2.VideoCapture(0)
     maskClassifier = Classifier('Model/keras_model.h5', 'Model/labels.txt')
     while True:
